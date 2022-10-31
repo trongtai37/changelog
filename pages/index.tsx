@@ -5,7 +5,7 @@ const Home: NextPage = () => {
     <div className='mx-auto max-w-3xl prose'>
       <p></p>
       <h1>
-        Hi!, I'm <span className='brand-text'>trongtai37</span>
+        Hi!, I&apos;m <span className='brand-text'>trongtai37</span>
       </h1>
       <p>
         This is my corner where I post something related to web development!{' '}

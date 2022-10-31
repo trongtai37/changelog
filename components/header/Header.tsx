@@ -33,6 +33,7 @@ export const Header = () => {
           href='https://github.com/trongtai37/'
           target='_blank'
           title='Github Profile'
+          rel='noreferrer'
         >
           <svg
             viewBox='0 0 16 16'

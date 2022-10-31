@@ -6,7 +6,7 @@ const ReadMe = () => {
       <p></p>
       <p>I am Tai Nguyen Trong (Tony)</p>
       <p>
-        I'm currently a Software Engineer working at SamsungSDS. I love
+        I&apos;m currently a Software Engineer working at SamsungSDS. I love
         Typescript and Web development.
       </p>
 
