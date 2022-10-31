@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .hover-underline-animation {
+    display: inline-block;
+    position: relative;
+  }
+
+  .hover-underline-animation:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1.5px;
+    bottom: 0;
+    left: 0;
+    transform-origin: bottom center;
+    transition: transform 0.2s ease-in-out;
+    @apply bg-gradient-to-r from-blue-500 to-green-500;
+  }
+
+  .hover-underline-animation:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom center;
+  }
+
+  .brand-text {
+    @apply text-transparent bg-gradient-to-r from-blue-500 bg-clip-text to-green-500;
+  }
+}
