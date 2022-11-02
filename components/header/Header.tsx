@@ -14,23 +14,23 @@ const navigations = [
 
 export const Header = () => {
   return (
-    <header className='h-14 border-b flex justify-center sticky top-0 backdrop-blur-md'>
+    <header className='h-14 border-b dark:border-b-slate-900 flex justify-center sticky top-0 backdrop-blur-md'>
       <nav className='mx-auto flex gap-6 justify-center items-center h-full container max-w-3xl px-4'>
         <Link href='/'>
           <div className='mr-auto cursor-pointer text-xl font-bold brand-text'>
-            trongtai37
+            {/* trongtai37 */}
           </div>
         </Link>
         {navigations.map((nav) => (
           <Link href={nav.to} key={nav.name}>
-            <div className='cursor-pointer prose prose-p hover-underline-animation'>
+            <div className='cursor-pointer prose dark:prose-invert prose-p hover-underline-animation'>
               {nav.name}
             </div>
           </Link>
         ))}
 
         <a
-          href='https://github.com/trongtai37/'
+          href='https://github.com/trongtai37/changelog'
           target='_blank'
           title='Github Profile'
           rel='noreferrer'

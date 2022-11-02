@@ -1,10 +1,10 @@
-import { MainLayout } from 'layouts';
 import { getAllPosts, getPostBySlug } from 'lib/api';
 import markdownToHtml from 'lib/markdownToHtml';
 import type { Post } from 'models/post';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import Giscus from '@giscus/react';
 
 type PostProps = {
   post: Post;
@@ -19,27 +19,40 @@ const BlogPost = ({ post, morePosts, preview }: PostProps) => {
   }
 
   return (
-    <article className='prose prose-slate mx-auto max-w-3xl'>
+    <article className='prose prose-slate dark:prose-invert mx-auto max-w-3xl pt-8'>
       <Head>
         <title>{post.title}</title>
         <meta property='og:image' content={post.ogImage.url} />
-        {/* <link
-          rel='preload'
-          href='https://unpkg.com/prismjs@0.0.1/themes/prism-okaidia.css'
-          as='script'
-        /> */}
         <link
           rel='stylesheet'
           href='https://prismjs.com/themes/prism-tomorrow.css'
         />
       </Head>
-      {/* <PostHeader
-        title={post.title}
-        coverImage={post.coverImage}
-        date={post.date}
-        author={post.author}
-      /> */}
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      <h1 className='text-center'>{post.title}</h1>
+      <time className='block text-center'>
+        {new Date().toLocaleDateString()}
+      </time>
+      <img
+        className='w-full object-cover aspect-video'
+        src='https://images.unsplash.com/photo-1667326792403-55f2acb32d50'
+      />
+      <hr />
+      <section dangerouslySetInnerHTML={{ __html: post.content }} />
+      <Giscus
+        id='comments'
+        repo='trongtai37/changelog'
+        repoId='R_kgDOIPZLUg='
+        category='Q&A'
+        categoryId='DIC_kwDOIPZLUs4CSVB_'
+        mapping='url'
+        term='Welcome to @giscus/react component!'
+        reactionsEnabled='1'
+        emitMetadata='0'
+        inputPosition='top'
+        theme='dark'
+        lang='en'
+        loading='lazy'
+      />
     </article>
   );
 };
