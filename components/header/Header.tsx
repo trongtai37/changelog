@@ -18,16 +18,16 @@ export const Header = () => {
       <nav className='mx-auto flex gap-6 justify-center items-center h-full container max-w-3xl px-4'>
         <Link href='/'>
           <div className='mr-auto cursor-pointer text-xl font-bold brand-text'>
-            {/* trongtai37 */}
+            trongtai37
           </div>
         </Link>
-        {navigations.map((nav) => (
+        {/* {navigations.map((nav) => (
           <Link href={nav.to} key={nav.name}>
             <div className='cursor-pointer prose dark:prose-invert prose-p hover-underline-animation'>
               {nav.name}
             </div>
           </Link>
-        ))}
+        ))} */}
 
         <a
           href='https://github.com/trongtai37/changelog'

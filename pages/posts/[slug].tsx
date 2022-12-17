@@ -5,14 +5,15 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import Giscus from '@giscus/react';
+import Image from 'next/image';
 
-type PostProps = {
+interface PostProps {
   post: Post;
   morePosts: Post[];
   preview?: boolean;
-};
+}
 
-const BlogPost = ({ post, morePosts, preview }: PostProps) => {
+const BlogPost = ({ post }: PostProps) => {
   const router = useRouter();
   if (!router.isFallback && !post?.slug) {
     return <div>Error</div>;
@@ -28,13 +29,11 @@ const BlogPost = ({ post, morePosts, preview }: PostProps) => {
           href='https://prismjs.com/themes/prism-tomorrow.css'
         />
       </Head>
-      <h1 className='text-center'>{post.title}</h1>
-      <time className='block text-center'>
-        {new Date().toLocaleDateString()}
-      </time>
-      <img
+      <h1 className='text-center mb-2'>{post.title}</h1>
+      <Image
         className='w-full object-cover aspect-video'
         src='https://images.unsplash.com/photo-1667326792403-55f2acb32d50'
+        alt='preview image'
       />
       <hr />
       <section dangerouslySetInnerHTML={{ __html: post.content }} />
@@ -49,7 +48,7 @@ const BlogPost = ({ post, morePosts, preview }: PostProps) => {
         reactionsEnabled='1'
         emitMetadata='0'
         inputPosition='top'
-        theme='dark'
+        theme='light'
         lang='en'
         loading='lazy'
       />
