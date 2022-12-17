@@ -9,6 +9,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@giscus/react": "^2.2.0",
     "@headlessui/react": "^1.6.5",
     "gray-matter": "^4.0.3",
     "next": "12.2.0",
