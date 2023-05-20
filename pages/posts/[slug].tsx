@@ -29,13 +29,17 @@ const BlogPost = ({ post }: PostProps) => {
           href='https://prismjs.com/themes/prism-tomorrow.css'
         />
       </Head>
-      <h1 className='text-center mb-2'>{post.title}</h1>
-      <Image
-        className='w-full object-cover aspect-video'
-        src='https://images.unsplash.com/photo-1667326792403-55f2acb32d50'
-        alt='preview image'
-      />
-      <hr />
+      <header>
+        <h1 className='mb-2 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white'>
+          {post.title}
+        </h1>
+        <p className='text-base font-light text-gray-500 dark:text-gray-400'>
+          <time dateTime='2022-02-08' title='February 8th, 2022'>
+            Feb. 8, 2022
+          </time>
+        </p>
+        <hr />
+      </header>
       <section dangerouslySetInnerHTML={{ __html: post.content }} />
       <Giscus
         id='comments'

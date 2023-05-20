@@ -1,6 +1,7 @@
 import { getAllPosts } from 'lib/api';
 import { Post } from 'models/post';
 import type { NextPage } from 'next';
+import Head from 'next/head';
 
 interface HomeProps {
   posts: Post[];
@@ -9,6 +10,9 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ posts }) => {
   return (
     <div className='mx-auto max-w-3xl prose'>
+      <Head>
+        <title>trongtai37 | Personal Blog</title>
+      </Head>
       <p></p>
       <h1>Hi!, I&apos;m Tai</h1>
       <p>I am a software engineer with a passion for web development.</p>

@@ -3,31 +3,27 @@ import * as React from 'react';
 
 const navigations = [
   {
-    name: 'Changelog',
+    name: 'Changelogs',
     to: '/change-logs',
-  },
-  {
-    name: 'Readme',
-    to: '/read-me',
   },
 ];
 
 export const Header = () => {
   return (
     <header className='h-14 border-b dark:border-b-slate-900 flex justify-center sticky top-0 backdrop-blur-md'>
-      <nav className='mx-auto flex gap-6 justify-center items-center h-full container max-w-3xl px-4'>
+      <nav className='mx-auto max-w-3xl flex gap-6 justify-center items-center h-full container px-4 md:px-0'>
         <Link href='/'>
           <div className='mr-auto cursor-pointer text-xl font-bold brand-text'>
             trongtai37
           </div>
         </Link>
-        {/* {navigations.map((nav) => (
+        {navigations.map((nav) => (
           <Link href={nav.to} key={nav.name}>
             <div className='cursor-pointer prose dark:prose-invert prose-p hover-underline-animation'>
               {nav.name}
             </div>
           </Link>
-        ))} */}
+        ))}
 
         <a
           href='https://github.com/trongtai37/changelog'
