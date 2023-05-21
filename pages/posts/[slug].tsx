@@ -1,16 +1,14 @@
-import { getAllPosts, getPostBySlug } from 'lib/api';
+import { getPostBySlug, getPostsSlugs } from 'lib/api';
 import markdownToHtml from 'lib/markdownToHtml';
 import type { Post } from 'models/post';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import Giscus from '@giscus/react';
-import Image from 'next/image';
+import { formatDate } from 'lib/date';
 
 interface PostProps {
   post: Post;
-  morePosts: Post[];
-  preview?: boolean;
 }
 
 const BlogPost = ({ post }: PostProps) => {
@@ -23,7 +21,6 @@ const BlogPost = ({ post }: PostProps) => {
     <article className='prose prose-slate dark:prose-invert mx-auto max-w-3xl pt-8'>
       <Head>
         <title>{post.title}</title>
-        <meta property='og:image' content={post.ogImage.url} />
         <link
           rel='stylesheet'
           href='https://prismjs.com/themes/prism-tomorrow.css'
@@ -35,7 +32,7 @@ const BlogPost = ({ post }: PostProps) => {
         </h1>
         <p className='text-base font-light text-gray-500 dark:text-gray-400'>
           <time dateTime='2022-02-08' title='February 8th, 2022'>
-            Feb. 8, 2022
+            {formatDate(new Date(post.date))}
           </time>
         </p>
         <hr />
@@ -69,15 +66,7 @@ export async function getStaticProps({
     slug: string;
   };
 }) {
-  const post = getPostBySlug(params.slug, [
-    'title',
-    'date',
-    'slug',
-    'author',
-    'content',
-    'ogImage',
-    'coverImage',
-  ]);
+  const post = getPostBySlug(params.slug);
   const content = await markdownToHtml(post.content || '');
 
   return {
@@ -91,13 +80,13 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug']);
+  const slugs = getPostsSlugs();
 
   return {
-    paths: posts.map((post) => {
+    paths: slugs.map((slug) => {
       return {
         params: {
-          slug: post.slug,
+          slug,
         },
       };
     }),
