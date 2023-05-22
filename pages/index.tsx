@@ -10,7 +10,7 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ posts }) => {
   return (
-    <div className='mx-auto max-w-3xl prose'>
+    <div className='mx-auto max-w-3xl prose dark:prose-invert'>
       <Head>
         <title>trongtai37 | Personal Blog</title>
       </Head>

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import Giscus from '@giscus/react';
 import { formatDate } from 'lib/date';
+import { useTheme } from 'hooks/useTheme';
 
 interface PostProps {
   post: Post;
@@ -13,6 +14,8 @@ interface PostProps {
 
 const BlogPost = ({ post }: PostProps) => {
   const router = useRouter();
+  const { isDarkMode } = useTheme();
+
   if (!router.isFallback && !post?.slug) {
     return <div>Error</div>;
   }
@@ -49,7 +52,7 @@ const BlogPost = ({ post }: PostProps) => {
         reactionsEnabled='1'
         emitMetadata='0'
         inputPosition='top'
-        theme='light'
+        theme={isDarkMode ? 'dark' : 'light'}
         lang='en'
         loading='lazy'
       />

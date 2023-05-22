@@ -6,7 +6,7 @@ import * as React from 'react';
 
 const ChangeLogs = ({ posts }: { posts: Post[] }) => {
   return (
-    <div className='mx-auto max-w-3xl'>
+    <div className='mx-auto max-w-3xl prose dark:prose-invert'>
       <Head>
         <title>trongtai37 | Changelogs</title>
       </Head>

@@ -9,12 +9,12 @@ interface PostCardProps {
 
 export const PostCard = ({ post }: PostCardProps) => {
   return (
-    <article className='py-6 bg-white border-b border-gray-200 '>
+    <article className='py-6 border-b border-gray-200'>
       <div className='flex justify-between items-center mb-4 text-gray-500'>
         <span className='text-sm'>{`${post?.readingTimeInMinutes} minutes reading`}</span>
         <span className='text-sm'>{formatDate(new Date(post.date))}</span>
       </div>
-      <h2 className='my-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
+      <h2 className='my-2 text-2xl font-bold tracking-tight text-gray-900'>
         <Link href={`/posts/${post?.slug}`} passHref>
           <a className='hover:underline'>{post?.title}</a>
         </Link>
