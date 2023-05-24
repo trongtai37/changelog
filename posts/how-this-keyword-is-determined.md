@@ -148,7 +148,78 @@ By calling `foo(...)` with `new` in front of it, we have constructed a new objec
 
 ## What about precedence?
 
-TBD
+So, we have uncovered rules for binding `this` in function calls, all we need to do is find the call-site and inspect it to see which rule applies. But, what if the found call-site can be applied many rules at the same time. There must be an order of precedence to these rules, let's see.
+
+Obviously, `Default binding` is the lowest priority rule.
+
+`Explicit binding` takes precedence over `Implicit binding`. So, before `Implicit binding` can be applied, we have to ask first if `Explicit binding` can be.
+
+```js
+function foo() {
+  console.log(this.a);
+}
+var obj1 = {
+  a: 2,
+  foo: foo,
+};
+
+var obj2 = {
+  a: 3,
+  foo: foo,
+};
+
+obj1.foo(); // 2
+obj2.foo(); // 3
+
+obj1.foo.call(obj2); // 3
+obj2.foo.call(obj1); // 2
+```
+
+Next, `new Binding` is more precedent than `Implicit binding`.
+
+```js
+function foo(something) {
+  this.a = something;
+}
+
+var obj1 = {
+  foo: foo,
+};
+
+var obj2 = {};
+
+obj1.foo(2);
+console.log(obj1.a); // 2
+
+obj1.foo.call(obj2, 3);
+console.log(obj2.a); // 3
+
+var bar = new obj1.foo(4);
+console.log(obj1.a); // 2
+console.log(bar.a); // 4
+```
+
+The rest work is to figure out where `new Binding` and `Explicit binding` (`bind()` function) take precedence.
+
+> Note: `new` and `call`/`apply` can not be used together, e.g syntax `new foo.call(obj1)` is not valid in Javascript. So, there's no need to compare precedence between `new Binding` and `call`/`apply`.
+> Consider this code.
+
+```js
+function foo(something) {
+  this.a = something;
+}
+
+var obj1 = {};
+var bar = foo.bind(obj1);
+bar(2);
+console.log(obj1.a); // 2
+
+var baz = new bar(3);
+console.log(obj1.a); // 2
+console.log(baz.a); // 3
+```
+
+Although `bar` function is hard-bound against `obj1`, but when it is invoked with `new` keyword, `this` is referenced to `baz` object. It means that `new Binding` rule can override the hard-binding behavior of `bind` function. Interesting!
 
 ## There are always special cases
 
@@ -209,3 +280,8 @@ Determining the `this` binding for an executing function requires finding the di
 Be aware of some exceptions such as `Ignored "this"` and `Arrow function` when determining also.
 
 Happy tracing!
+
+## References
+
+- [You don't know JS - this & object prototypes](https://gist.github.com/kad3nce/9686393)
+- [Javascript.info - Object methods, "this"](https://javascript.info/object-methods)
